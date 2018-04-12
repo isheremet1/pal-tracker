@@ -1,6 +1,5 @@
 package io.pivotal.pal.tracker;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,33 +8,33 @@ import java.util.List;
 
 
 @RestController
-public class TimeEntryController {
+public class TimeEntryControllerV2 {
 
 
     private TimeEntryRepository timeEntryRepository;
 
-    public TimeEntryController(TimeEntryRepository timeEntryRepository) {
+    public TimeEntryControllerV2(TimeEntryRepository timeEntryRepository) {
         this.timeEntryRepository = timeEntryRepository;
     }
 
-    @PostMapping("/time-entries")
+    @PostMapping(value = "/time-entries", consumes = "application/io.pivotal.pal.tracker.v2+json", produces = "application/io.pivotal.pal.tracker.v2+json")
     public ResponseEntity create(@RequestBody TimeEntry timeEntry) {
         return new ResponseEntity(timeEntryRepository.create(timeEntry), HttpStatus.CREATED);
     }
 
-    @GetMapping("/time-entries/{id}")
+    @GetMapping(value = "/time-entries/{id}", consumes = "application/io.pivotal.pal.tracker.v2+json", produces = "application/io.pivotal.pal.tracker.v2+json")
     public ResponseEntity<TimeEntry> read(@PathVariable long id) {
         TimeEntry timeEntry = timeEntryRepository.find(id);
 
         return new ResponseEntity(timeEntry, timeEntry != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/time-entries")
+    @GetMapping(value = "/time-entries", consumes = "application/io.pivotal.pal.tracker.v2+json", produces = "application/io.pivotal.pal.tracker.v2+json")
     public ResponseEntity<List<TimeEntry>> list() {
         return new ResponseEntity(timeEntryRepository.list(), HttpStatus.OK);
     }
 
-    @PutMapping("/time-entries/{id}")
+    @PutMapping(value = "/time-entries/{id}", consumes = "application/io.pivotal.pal.tracker.v2+json", produces = "application/io.pivotal.pal.tracker.v2+json")
     public ResponseEntity update(@PathVariable long id,@RequestBody TimeEntry timeEntry) {
 
 //        if (timeEntryRepository.find(id) == null)
@@ -46,7 +45,7 @@ public class TimeEntryController {
         return new ResponseEntity(timeEntryUpdated, timeEntryUpdated != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/time-entries/{id}")
+    @DeleteMapping(value = "/time-entries/{id}", consumes = "application/io.pivotal.pal.tracker.v2+json", produces = "application/io.pivotal.pal.tracker.v2+json")
     public ResponseEntity<TimeEntry> delete(@PathVariable long id) {
         timeEntryRepository.delete(id);
         return new ResponseEntity(null, HttpStatus.NO_CONTENT);
