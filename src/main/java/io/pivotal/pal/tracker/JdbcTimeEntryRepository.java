@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,9 +24,7 @@ public class JdbcTimeEntryRepository implements TimeEntryRepository {
     private JdbcTemplate jdbcTemplate;
     private TimeEntryRepository timeEntryRepository;
 
-    public JdbcTimeEntryRepository(MysqlDataSource dataSource) {
-
-        dataSource.setUrl(System.getenv("SPRING_DATASOURCE_URL"));
+    public JdbcTimeEntryRepository(DataSource dataSource) {
 
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
