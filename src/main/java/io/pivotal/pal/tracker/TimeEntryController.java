@@ -38,9 +38,8 @@ public class TimeEntryController {
     @PutMapping("/time-entries/{id}")
     public ResponseEntity update(@PathVariable long id,@RequestBody TimeEntry timeEntry) {
 
-//        if (timeEntryRepository.find(id) == null)
-//            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
-
+     //   if (timeEntryRepository.find(id) == null)
+     //       return new ResponseEntity(HttpStatus.NOT_FOUND);
         TimeEntry timeEntryUpdated = timeEntryRepository.update(id, timeEntry);
 
         return new ResponseEntity(timeEntryUpdated, timeEntryUpdated != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
@@ -48,12 +47,12 @@ public class TimeEntryController {
 
     @DeleteMapping("/time-entries/{id}")
     public ResponseEntity<TimeEntry> delete(@PathVariable long id) {
+
+        //if(timeEntryRepository.find(id) == null)
+        //    return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+
         timeEntryRepository.delete(id);
         return new ResponseEntity(null, HttpStatus.NO_CONTENT);
-
-         //(timeEntryRepository.find(id) == null)
-           // return new ResponseEntity(null, HttpStatus.NOT_FOUND);
-
 
 
     }
