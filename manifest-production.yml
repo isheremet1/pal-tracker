@@ -2,5 +2,5 @@
 applications:
 - name: pal-tracker
   path: build/libs/pal-tracker.jar
-  host: pal-rb-tracker
+  host: pal-is-tracker
   
