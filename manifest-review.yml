@@ -5,4 +5,6 @@ applications:
   host: is-pal-tracker-review
   services:
   - tracker-database
+env:
+  SECURITY_FORCE_HTTPS:  true
 
